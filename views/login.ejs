@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <% include static/head %>
+  <body>
+    <% include static/topNav %>
+
+    <div class="container">
+
+        <div>
+            <form class="form-horizontal" onsubmit="return false">
+                <fieldset>
+                    <legend>登录</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">用户名</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="input01">
+                            <p class="help-block">
+                                email
+                            </p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input02">密码</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="input02">
+                            <p class="help-block">
+                                密码
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary js_sub">确认</button>
+                        <button class="btn">取消</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+
+        <% include static/footer %>
+    </div>
+
+
+  </body>
+</html>
+<script type="text/javascript">
+$(function(){
+var name = $('#input01'),
+    pwd = $('#input02');
+function getParam(){
+    if(!name.val()){
+        alert('name wrong');
+        return false;
+    }
+    if(!pwd.val()){
+        alert('pwd wrong');
+        return false;
+    }
+
+    return {
+        name : name.val(),
+        password : pwd.val()
+    };
+}
+
+$('.js_sub').click(function(){
+    var param = getParam();
+    if(!param){
+        return false;
+    }
+
+    param.MsgType = 'Login';
+    $.ajax({
+        url : '/do',
+        data : param,
+        type : 'post',
+        dataType : 'json',
+        success : function(json){
+            if(json.Status > 0){
+                alert(json.StatusText);
+                location.href = '/';
+            }
+            else{
+                alert(json.Error);
+            }
+        }
+    });
+
+});
+
+});
+</script>

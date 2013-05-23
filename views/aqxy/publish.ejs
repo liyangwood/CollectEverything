@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<% include ../static/head %>
+<body>
+<% include ../static/topNav %>
+
+<script type="text/javascript" src="/kindeditor-4.1.5/kindeditor-min.js"></script>
+<script type="text/javascript" src="/kindeditor-4.1.5/lang/zh_CN.js"></script>
+<div class="container">
+    <div>
+        <form class="form-horizontal" onsubmit="return false">
+            <fieldset>
+                <legend>发布新的爱情宣言</legend>
+
+                <div class="control-group">
+                    <textarea class="input-xlarge" id="js_text" style="width:100%;height:500px;"></textarea>
+                </div>
+
+
+                <div class="form-actions">
+                    <button class="btn btn-primary js_sub">发布</button>
+                    <button class="btn">取消</button>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+
+
+    <% include ../static/footer %>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+var editor = '';
+KindEditor.ready(function(K){
+    editor = K.create('#js_text', {
+        allowFileManager : true
+    });
+});
+
+$(function(){
+
+    $('.js_sub').click(function(){
+        var text = editor.html();
+        alert(text);
+        return;
+
+        if(!text){
+            alert('text wrong');
+            return;
+        }
+        $.ajax({
+            url : '/do',
+            type : 'post',
+            dataType : 'json',
+            data : {
+                MsgType : 'PublishAqxy',
+                content : text
+            },
+            success : function(json){
+                if(json.Status > 0){
+                    alert(json.StatusText);
+                    location.reload();
+                }
+                else{
+                    alert(json.Error);
+                }
+            }
+        });
+    });
+});
+
+
+</script>

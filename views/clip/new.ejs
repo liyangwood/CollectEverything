@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<% include ../static/head %>
+<body>
+<% include ../static/topNav %>
+
+<div class="container">
+    <div class="page-header">
+        <h1>文章列表 <small>求婚吧</small></h1>
+    </div>
+    <div class="row">
+        <div class="span8">
+            <% for(var i=0,len=clipList.length; i<len; i++){ %>
+            <h2><a href="/clip/<%= clipList[i].id %>"><%= clipList[i].title %></a></h2>
+            <p>
+                发布于<%= clipList[i].createTime %>
+            </p>
+            <div class="well">
+                <%= clipList[i].brief %>
+
+                <span data-id="<%= clipList[i].id %>" class="badge js_reply badge-success"><%= clipList[i].replyNum %></span>
+            </div>
+
+            <% } %>
+        </div>
+    </div>
+
+
+    <% include ../static/footer %>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+$('.js_reply').click(function(){
+    var o = $(this);
+    CF.ajax({
+        MsgType : 'ReplyClip',
+        clipid : o.data('id'),
+        comment : 'Good'
+    }, function(d, text){
+        o.html(d.replyNum);
+    });
+});
+
+
+
+
+</script>

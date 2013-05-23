@@ -1,0 +1,30 @@
+[2013年5月23日 16时39分9秒]ReferenceError: E:\CollectEverything\views\index.ejs:5
+    3|   <% include static/head %>
+    4|   <body>
+ >> 5|     <% include static/topNav %>
+    6| 
+    7|     <div class="container">
+    8|         <%= isLogin %>
+
+static is not defined
+    at buf.push.__stack.lineno (eval at <anonymous> (E:\CollectEverything\node_modules\ejs\lib\ejs.js:236:14))
+    at eval (eval at <anonymous> (E:\CollectEverything\node_modules\ejs\lib\ejs.js:236:14))
+    at eval (eval at <anonymous> (E:\CollectEverything\node_modules\ejs\lib\ejs.js:236:14))
+    at exports.compile (E:\CollectEverything\node_modules\ejs\lib\ejs.js:249:15)
+    at Object.exports.render (E:\CollectEverything\node_modules\ejs\lib\ejs.js:287:13)
+    at View.exports.renderFile [as engine] (E:\CollectEverything\node_modules\ejs\lib\ejs.js:317:20)
+    at View.render (E:\CollectEverything\node_modules\express\lib\view.js:75:8)
+    at Function.app.render (E:\CollectEverything\node_modules\express\lib\application.js:500:10)
+    at ServerResponse.res.render (E:\CollectEverything\node_modules\express\lib\response.js:716:7)
+    at Object.exports.render.User.getAllUser.callback (E:\CollectEverything\routes\index.js:8:17)
+[2013年5月23日 16时43分23秒]Error: ENOENT, no such file or directory 'E:\CollectEverything\views\'static\head'.ejs'
+    at Object.fs.openSync (fs.js:338:18)
+    at fs.readFileSync (fs.js:182:15)
+    at Object.exports.parse (E:\CollectEverything\node_modules\ejs\lib\ejs.js:159:19)
+    at exports.compile (E:\CollectEverything\node_modules\ejs\lib\ejs.js:223:15)
+    at Object.exports.render (E:\CollectEverything\node_modules\ejs\lib\ejs.js:283:10)
+    at View.exports.renderFile [as engine] (E:\CollectEverything\node_modules\ejs\lib\ejs.js:317:20)
+    at View.render (E:\CollectEverything\node_modules\express\lib\view.js:75:8)
+    at Function.app.render (E:\CollectEverything\node_modules\express\lib\application.js:500:10)
+    at ServerResponse.res.render (E:\CollectEverything\node_modules\express\lib\response.js:716:7)
+    at Object.exports.render.User.getAllUser.callback (E:\CollectEverything\routes\index.js:8:17)

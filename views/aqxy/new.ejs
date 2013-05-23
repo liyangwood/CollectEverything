@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<% include ../static/head %>
+<body>
+<% include ../static/topNav %>
+
+<div class="container">
+    <div class="page-header">
+        <h1>爱情宣言 <small>求婚吧</small></h1>
+    </div>
+    <div class="row">
+        <div class="span8">
+            <% for(var i=0,len=xyList.length; i<len; i++){ %>
+            <h2><a rel="tooltip" data-original-title="柴静始终站在离新闻最近的地方，她以她的犀利和敏锐、坚定与坚持，最终历练成为一名优秀的新闻工作者。" href="/aqxy/<%= xyList[i].authorUuid %>"><%= xyList[i].authorName %></a></h2>
+            <p>
+                <%= xyList[i].createTime %>
+            </p>
+            <div class="well">
+                <%= xyList[i].content %>
+
+                <span data-id="<%= xyList[i].id %>" data-uid="<%= xyList[i].authorUuid %>" data-uname="<%= xyList[i].authorName %>" class="badge js_reply badge-success"><%= xyList[i].replyNum %></span>
+            </div>
+
+            <% } %>
+        </div>
+    </div>
+
+
+    <% include ../static/footer %>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+$('.js_reply').click(function(){
+    var o = $(this);
+    CF.ajax({
+        MsgType : 'ReplyAqxy',
+        aqxyId : o.data('id'),
+        uid : o.data('uid'),
+        uname : o.data('uname'),
+        comment : ''
+    }, function(d, text){
+        o.html(d.replyNum);
+    });
+});
+
+
+
+
+</script>

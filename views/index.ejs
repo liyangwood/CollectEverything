@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <% include static/head %>
+  <body>
+    <% include static/topNav %>
+
+    <div class="container">
+        <%= isLogin %>
+        <br />
+        <%= JSON.stringify(user) %>
+        <br />
+        <hr />
+         <%= JSON.stringify(userList) %>
+
+
+
+        <% include static/footer %>
+    </div>
+
+
+  </body>
+</html>

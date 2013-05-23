@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <% include static/head %>
+  <body>
+    <% include static/topNav %>
+
+    <div class="container">
+
+        <div>
+            <form class="form-horizontal" onsubmit="return false">
+                <fieldset>
+                    <legend>注册新用户</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="input01">用户名</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="input01">
+                            <p class="help-block">
+                                email
+                            </p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input02">密码</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="input02">
+                            <p class="help-block">
+                                密码
+                            </p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input03">昵称</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="input03">
+                            <p class="help-block">
+                                用户昵称
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary js_sub">保存更改</button>
+                        <button class="btn">取消</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+
+        <% include static/footer %>
+    </div>
+
+  </body>
+</html>
+<script type="text/javascript">
+$(function(){
+var name = $('#input01'),
+    pwd = $('#input02'),
+    nkname = $('#input03');
+function getParam(){
+    if(!name.val()){
+        alert('name wrong');
+        return false;
+    }
+    if(!pwd.val()){
+        alert('pwd wrong');
+        return false;
+    }
+    if(!nkname.val()){
+        alert('nkname wrong');
+        return false;
+    }
+    return {
+        name : name.val(),
+        password : pwd.val(),
+        nickname : nkname.val()
+    };
+}
+
+$('.js_sub').click(function(){
+    var param = getParam();
+    if(!param){
+        return false;
+    }
+
+    param.MsgType = 'RegUser';
+    $.ajax({
+        url : '/do',
+        data : param,
+        type : 'post',
+        dataType : 'json',
+        success : function(json){
+            if(json.Status > 0){
+                alert(json.StatusText);
+                location.href = '/login';
+            }
+            else{
+                alert(json.Error);
+            }
+        }
+    });
+
+});
+
+});
+</script>
